@@ -7,9 +7,8 @@ My tech stack:
 - Django Rest Framework
 - PostgreSQL
 - React
-- Redux
 - Next.js
+- Redux
 - Docker
 - AWS
 - Git
-- Linux
