@@ -24,7 +24,8 @@ function MyApp({ Component, pageProps }) {
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Mundolapa</title>
+        <title>Mundolapa.dev</title>
+          <link rel="icon" href="/images/favicon.ico" />
       </Head>
 
       <Component {...pageProps} />
