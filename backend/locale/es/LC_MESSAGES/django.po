@@ -1,0 +1,154 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-09 21:58-0600\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: base/models.py:25
+msgid "logo"
+msgstr "logo"
+
+#: base/models.py:25
+msgid "Upload website logo"
+msgstr "Carga el logo del sitio web"
+
+#: base/models.py:26
+msgid "favicon"
+msgstr "favicon"
+
+#: base/models.py:27
+msgid "Upload website favicon"
+msgstr "Carga el favicon del sitio web"
+
+#: base/models.py:28
+msgid "email"
+msgstr "email"
+
+#: base/models.py:28
+msgid "Website email"
+msgstr "Email del sitio web"
+
+#: base/models.py:29
+msgid "telephone"
+msgstr "teléfono"
+
+#: base/models.py:30
+msgid "Website telephone"
+msgstr "Teléfono del sitio web"
+
+#: base/models.py:59 base/models.py:60
+msgid "Global Settings"
+msgstr "Configuraciones Globales"
+
+#: base/models.py:65
+msgid "title"
+msgstr "título"
+
+#: base/models.py:66
+msgid "Website SEO Title"
+msgstr "Título del sitio web"
+
+#: base/models.py:67
+msgid "description"
+msgstr "descripción"
+
+#: base/models.py:68
+msgid "Website SEO Description"
+msgstr "Descripción del sitio web"
+
+#: base/models.py:69
+msgid "keywords"
+msgstr "palabras claves"
+
+#: base/models.py:70
+msgid "Website SEO Keywords"
+msgstr "Palabras claves del sitio web"
+
+#: base/models.py:71
+msgid "copyright"
+msgstr "copyright"
+
+#: base/models.py:72
+msgid "Copyright Footer Text"
+msgstr "Texto de Copyright"
+
+#: base/models.py:73
+msgid "footer text"
+msgstr "texto del pié de página"
+
+#: base/models.py:73
+msgid "Website Footer Text"
+msgstr "Texto del pié de página del sitio web"
+
+#: base/models.py:74
+msgid "about us"
+msgstr "sobre nosotros"
+
+#: base/models.py:74
+msgid "About Us Text"
+msgstr "Texto sobre nosotros"
+
+#: base/models.py:75
+msgid "terms and conditions"
+msgstr "términos y condiciones"
+
+#: base/models.py:76
+msgid "Terms And Conditions Text"
+msgstr "Términos y Condiciones"
+
+#: base/models.py:77
+msgid "privacy policy"
+msgstr "políticas de privacidad"
+
+#: base/models.py:77
+msgid "Privacy Policy"
+msgstr "Políticas de Privacidad"
+
+#: base/models.py:78
+msgid "our vision"
+msgstr "nuestra visión"
+
+#: base/models.py:78
+msgid "Our Vision Text"
+msgstr "Texto de Nuestra Visión"
+
+#: base/models.py:79
+msgid "our mission"
+msgstr "nuestra misión"
+
+#: base/models.py:79
+msgid "Our Mission Text"
+msgstr "Texto de Nuestra Misión"
+
+#: base/views.py:9
+msgid "Welcome to mundolapa.dev Api!"
+msgstr "Bienvenido a la Api de mundolapa.dev"
+
+#: base/views.py:23
+msgid "Resource not found."
+msgstr "No se encontró el recurso"
+
+#: core/settings.py:155
+msgid "English"
+msgstr "Inglés"
+
+#: core/settings.py:156
+msgid "Spanish"
+msgstr "Español"
+
+#: core/urls.py:30
+msgid "admin/"
+msgstr "admin/"
