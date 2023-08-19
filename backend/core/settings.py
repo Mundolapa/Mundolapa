@@ -10,7 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import datetime
 from pathlib import Path
+
+from django.utils.translation import gettext_lazy as _
 from prettyconf import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,14 +23,27 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY')
+# SECURITY WARNING: don't run with dev_mode turned on in production!
+DEV_MODE = True
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = config('SECRET_KEY')
 
+if DEV_MODE:
+    ALLOWED_HOSTS = [
+        '127.0.0.1',
+        'localhost',
+        '.mundolapa.dev'
+    ]
+else:
+    ALLOWED_HOSTS = [
+        '.mundolapa.dev',
+    ]
+
+SITE_ID = 1
 
 # Application definition
 
@@ -38,11 +54,40 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+
+    # Local apps
+    'api',
+    'base',
+    'faq',
+    'identity',
+
+    # Third party apps
+    'rest_framework',
+    'rest_framework.authtoken',
+    'rest_framework_simplejwt',
+    'dj_rest_auth',
+    'dj_rest_auth.registration',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.twitter',
+    'allauth.socialaccount.providers.google',
+    'mptt',
+    'parler',
+    'polymorphic',
+    'corsheaders',
+    'ordered_model',
+    'graphene_django',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -76,8 +121,12 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('DB_NEON_NAME'),
+        'USER': config('DB_NEON_USER'),
+        'PASSWORD': config('DB_NEON_PASSWORD'),
+        'HOST': config('DB_NEON_HOST'),
+        'PORT': config('DB_NEON_PORT')
     }
 }
 
@@ -104,21 +153,127 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGES = [
+    ('en', _('English')),
+    ('es', _('Spanish')),
+]
 
-TIME_ZONE = 'UTC'
+LANGUAGE_CODE = 'en'
+
+TIME_ZONE = 'America/Tegucigalpa'
 
 USE_I18N = True
 
 USE_TZ = True
 
+LOCALE_PATHS = [
+    BASE_DIR / 'locale'
+]
+
+PARLER_LANGUAGES = {
+    1: (
+        {'code': 'en', },  # English
+        {'code': 'es', },  # Spanish
+    ),
+    'default': {
+        'fallbacks': ['en'],
+        'hide_untranslated': False,
+    }
+}
+
+PARLER_ENABLE_CACHING = True
+PARLER_DEFAULT_ACTIVATE = True
+PARLER_SHOW_EXCLUDED_LANGUAGE_TABS = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Rest framework config
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
+    ],
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticatedOrReadOnly"
+    ],
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+    "PAGE_SIZE": 10
+}
+
+AUTHENTICATION_BACKENDS = (
+    "allauth.account.auth_backends.AuthenticationBackend",
+    "django.contrib.auth.backends.ModelBackend",
+)
+
+SIMPLE_JWT = {
+    'ALGORITHM': 'HS256',
+    'SIGNING_KEY': SECRET_KEY,
+    "AUTH_HEADER_TYPES": ["Bearer"],
+    "ACCESS_TOKEN_LIFETIME": datetime.timedelta(minutes=15),  # minutes=15
+    "REFRESH_TOKEN_LIFETIME": datetime.timedelta(days=14),  # days=14
+    "ROTATE_REFRESH_TOKENS": True,
+    'BLACKLIST_AFTER_ROTATION': True,
+}
+
+# DJ rest auth config
+REST_AUTH = {
+    'USE_JWT': True,
+    'SESSION_LOGIN': False,
+    'JWT_AUTH_COOKIE': 'jwt-auth',
+    'JWT_AUTH_REFRESH_COOKIE': 'jwt-refresh-auth',
+    'JWT_AUTH_HTTPONLY': False,
+    # 'REGISTER_SERIALIZER': 'identity.serializers.CustomRegisterSerializer',
+}
+
+# Allauth configuration
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+
+# CORS and CSRF
+if DEV_MODE:
+    CORS_ALLOW_ALL_ORIGINS = True
+    CSRF_TRUSTED_ORIGINS = [
+        "http://localhost:3000",
+        "http://backend.mundolapa.dev",
+        "https://backend.mundolapa.dev",
+    ]
+else:
+    CORS_ALLOWED_ORIGINS = [
+        "http://mundolapa.dev",
+        "https://mundolapa.dev",
+        "http://www.mundolapa.dev",
+        "https://www.mundolapa.dev",
+        "http://backend.mundolapa.dev",
+        "https://backend.mundolapa.dev",
+    ]
+    CSRF_TRUSTED_ORIGINS = [
+        "http://mundolapa.dev",
+        "https://mundolapa.dev",
+        "http://www.mundolapa.dev",
+        "https://www.mundolapa.dev",
+        "http://backend.mundolapa.dev",
+        "https://backend.mundolapa.dev",
+    ]
+
+# Graphene configuration
+GRAPHENE = {
+    'SCHEMA': 'core.schema.schema'
+}
+
