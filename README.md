@@ -5,10 +5,11 @@
 My tech stack:
 - Django
 - Django Rest Framework
+- Django Graphene
 - PostgreSQL
-- React
 - Next.js
-- Redux
+- GraphQL
 - Docker
 - AWS
-- Git
+
+I am testing GraphQL with Django Graphene in this project.
