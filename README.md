@@ -8,6 +8,7 @@ My tech stack:
 - Django Graphene
 - PostgreSQL
 - Next.js
+- Tailwind
 - GraphQL
 - Docker
 - AWS
