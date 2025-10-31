@@ -2,7 +2,7 @@
 
 > **Empowering Agriculture Through Technology**
 
-![GitHub last commit](https://img.shields.io/github/last-commit/mundolapa/main-website?color=2bb673&style=flat-square)
+![GitHub last commit](https://img.shields.io/github/last-commit/Mundolapa/main-website?color=2bb673&style=flat-square)
 ![Django](https://img.shields.io/badge/Django-5.2.4-092e20?style=flat-square&logo=django)
 ![Next.js](https://img.shields.io/badge/Next.js-15-000000?style=flat-square&logo=nextdotjs)
 ![AWS](https://img.shields.io/badge/AWS-Fargate%20|%20Lambda%20|%20RDS-FF9900?style=flat-square&logo=amazonaws)
