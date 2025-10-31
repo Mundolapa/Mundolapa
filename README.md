@@ -80,25 +80,48 @@ Our goal is to create a **unified agronomic intelligence layer** across all Agro
 ## 🧱 Tech Stack
 
 ### **Backend**
-- **Django 5.2 + DRF** — scalable backend with modular architecture (`core`, `api`, `integrations`, `notifications`, etc.)  
-- **PostgreSQL + PostGIS** — geospatial database for precision mapping  
-- **AWS RDS, S3, Lambda, SES, Cognito, Fargate** — fully cloud-based infrastructure  
-- **Docker, Celery, Redis** — containerized and asynchronous task management  
-- **Hexagonal architecture** for clean domain separation and scalability  
+- 🐍 **Django 5.2 + Django REST Framework** — modular backend with a clean hexagonal architecture (`core`, `api`, `integrations`, `notifications`, etc.)  
+- 🌐 **AWS Infrastructure:**  
+  - **RDS (PostgreSQL + PostGIS)** for spatial data  
+  - **Cognito** for user authentication and federated logins (Google, Facebook)  
+  - **Lambda** for scheduled and serverless tasks  
+  - **S3** for media storage (drone imagery, reports)  
+  - **SES** for transactional and contact emails  
+  - **Fargate + ECS** for Dockerized deployments  
+- 🧰 **Docker**, **Celery**, **Redis** for background processing and scalable containerized environments  
+- 🔒 **AWS Secrets Manager** for secure credentials and configuration  
+- ⚙️ **CI/CD** powered by **GitHub Actions**  
 
-### **Frontend**
-- **Next.js 15 (App Router)** + **TypeScript**
-- **Tailwind CSS v4** + **shadcn/ui** + **Framer Motion**
-- **Next-Intl** for multilingual support *(English, Spanish, French, Portuguese)*
-- **React Query / SWR** for optimized API data fetching
-- **Amplify Auth** for Cognito integration and OAuth (Google, Facebook)
+---
+
+### **Frontend (Web Platform)**
+- ⚛️ **Next.js 15 (App Router)** + **TypeScript** — dynamic web dashboard for all Agromatik modules  
+- 🎨 **Tailwind CSS v4**, **shadcn/ui**, and **Framer Motion** for a modern and responsive UI  
+- 🌍 **Next-Intl** for multilingual support *(English, Spanish, French, Portuguese)*  
+- 🔄 **React Query / SWR** for optimized API data synchronization  
+- 🔐 **Amplify Auth** integration for AWS Cognito and OAuth providers  
+- 🧩 Modular structure with dynamic pages and guards: `AuthGuard`, `ModuleGuard`, and `DashboardLayout`  
+
+---
+
+### **Mobile (Agromatik Field Tracker)**
+- 📱 **React Native** with **Expo** for cross-platform mobile field operations  
+- 🛰️ **Offline-first architecture** using local storage and sync queues for field data collection  
+- 🧭 **Mapbox SDK** integration for field mapping, GPS tracking, and spatial data input  
+- 📡 **API-first communication** with the Agromatik backend (REST + JSON schemas)  
+- 🔒 **AWS Amplify Auth** for secure mobile login using Cognito  
+- 📷 **Media capture integration** — upload photos, geotagged field images, and crop reports directly to S3  
+- 🧠 Future integration with **AI-based image recognition** (crop stress detection, pest classification)  
+- ⚙️ Built for **field technicians, agronomists, and client administrators** to collect, sync, and monitor real-time data.  
+
+---
 
 ### **DevOps & Data**
-- **AWS ECS / Fargate** deployments  
-- **GitHub Actions** for CI/CD  
-- **Amazon QuickSight** for analytics & BI  
-- **n8n** for workflow automation  
-- **Dockerized environments** for development and production  
+- ☁️ **AWS ECS / Fargate** for scalable deployments  
+- 🧩 **Amazon QuickSight** for integrated BI dashboards and analytics  
+- 🔄 **n8n workflows** for automation (notifications, report generation, triggers)  
+- 🧮 **Dockerized environments** for both development and production  
+- 🧠 **AI microservices** (in progress) — serverless endpoints for predictive analytics and computer vision tasks  
 
 ---
 
